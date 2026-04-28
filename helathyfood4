@@ -1,0 +1,143 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>FreshEats | Premium Health Portal</title>
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+
+<header>
+    <nav>
+        <div class="logo">Fresh<span>Eats</span></div>
+        <ul class="nav-links">
+            <li><a href="#calculator">Calculator</a></li>
+            <li><a href="#library">Nutrition Library</a></li>
+            <li><a href="#meal-plan">Daily Recipes</a></li>
+            <li><a href="#contact">Contact</a></li>
+        </ul>
+    </nav>
+</header>
+
+<section id="calculator" class="section">
+    <div class="container">
+        <h2>Smart Calorie Engine</h2>
+        <p>Calculate your Total Daily Energy Expenditure (TDEE) based on the Mifflin-St Jeor formula.</p>
+        <div class="calc-grid">
+            <div class="input-group">
+                <input type="number" id="weight" placeholder="Weight (kg)">
+                <input type="number" id="height" placeholder="Height (cm)">
+                <input type="number" id="age" placeholder="Age">
+                <select id="gender">
+                    <option value="male">Male</option>
+                    <option value="female">Female</option>
+                </select>
+                <button onclick="calculateTDEE()">Calculate My Goals</button>
+            </div>
+            <div id="results" class="hidden">
+                <div class="result-card">
+                    <h3>Your Maintenance: <span id="tdee-val">0</span> kcal</h3>
+                    <p id="tdee-advice"></p>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+
+<section id="library" class="section dark">
+    <div class="container">
+        <h2>Deep Detail Nutrition Library</h2>
+        <div class="lib-grid">
+            <div class="clickable-card" onclick="toggleDetail('magnesium')">
+                <h3>Magnesium: The Master Mineral <span>▼</span></h3>
+                <div id="magnesium" class="hidden-detail">
+                    <p><strong>Biochemistry:</strong> Involved in 300+ biochemical reactions including ATP (energy) production.</p>
+                    <p><strong>Detailed Benefit:</strong> It regulates neurotransmitters, which send signals throughout the brain and nervous system. It's essential for "deep sleep" cycles.</p>
+                    <p><strong>Daily Source:</strong> 100g of Spinach + 30g Pumpkin Seeds (Biji Labu).</p>
+                </div>
+            </div>
+            </div>
+    </div>
+</section>
+
+<footer id="contact">
+    <div class="container">
+        <div class="footer-content">
+            <div class="contact-info">
+                <h3>Contact Expert Support</h3>
+                <p><strong>📞 Phone:</strong> +60 3-8888 1234</p>
+                <p><strong>✉️ Email:</strong> expert@fresheats.com.my</p>
+                <p><strong>📍 Address:</strong> Level 15, Menara Health, Jalan Ampang, 50450 Kuala Lumpur, Malaysia</p>
+            </div>
+        </div>
+    </div>
+</footer>
+
+<script src="script.js"></script>
+</body>
+</html>
+function calculateTDEE() {
+    const weight = parseFloat(document.getElementById('weight').value);
+    const height = parseFloat(document.getElementById('height').value);
+    const age = parseFloat(document.getElementById('age').value);
+    const gender = document.getElementById('gender').value;
+
+    if (!weight || !height || !age) {
+        alert("Please fill in all details.");
+        return;
+    }
+
+    // BMR Calculation
+    let bmr;
+    if (gender === "male") {
+        bmr = (10 * weight) + (6.25 * height) - (5 * age) + 5;
+    } else {
+        bmr = (10 * weight) + (6.25 * height) - (5 * age) - 161;
+    }
+
+    const tdee = Math.round(bmr * 1.375); // Light Activity factor
+    document.getElementById('tdee-val').innerText = tdee;
+    document.getElementById('results').classList.remove('hidden');
+    document.getElementById('tdee-advice').innerText = 
+        `To lose weight, aim for ${tdee - 500} kcal. To build muscle, aim for ${tdee + 300} kcal.`;
+}
+
+function toggleDetail(id) {
+    const el = document.getElementById(id);
+    el.style.display = (el.style.display === 'block') ? 'none' : 'block';
+}
+Food Item,Deep Detail Benefit,Everyday Recipe Idea,Calories
+Tempeh,"Contains ""para-probiotics"" that survive cooking heat to support gut lining integrity.",Air-fried Tempeh Satay: Marinate in turmeric and lemongrass.,190 kcal/100g
+Chia Seeds,"Hydrophilic properties allow them to hold 12x their weight in water, aiding hydration.",Chia-Pandan Pudding: Soak in coconut milk overnight.,138 kcal (2 tbsp)
+Mackerel,Highest source of EPA/DHA Omega-3s which lower triglyceride levels in the blood.,Ikan Kembung Asam Pedas: Use extra ginger to boost digestion.,200 kcal/fillet
+:root {
+    --primary: #1a5d1a;
+    --secondary: #f4ba5f;
+    --bg: #f9fbf9;
+}
+
+body { font-family: 'Segoe UI', sans-serif; background: var(--bg); color: #333; line-height: 1.8; }
+.container { max-width: 1200px; margin: auto; padding: 40px 20px; }
+.hidden { display: none; }
+
+/* Calculator Styling */
+.calc-grid { background: white; padding: 30px; border-radius: 20px; box-shadow: 0 10px 30px rgba(0,0,0,0.05); }
+input, select, button { padding: 15px; margin: 10px; border-radius: 8px; border: 1px solid #ddd; }
+button { background: var(--primary); color: white; border: none; cursor: pointer; font-weight: bold; }
+
+/* Clickable Library Cards */
+.clickable-card { 
+    background: white; 
+    padding: 20px; 
+    border-radius: 12px; 
+    margin-bottom: 10px; 
+    cursor: pointer; 
+    transition: 0.3s;
+    border-left: 5px solid var(--secondary);
+}
+.clickable-card:hover { transform: scale(1.01); }
+.hidden-detail { display: none; padding-top: 20px; color: #666; border-top: 1px solid #eee; }
+
+/* Footer */
+footer { background: #111; color: white; padding: 60px 0; margin-top: 100px; }
