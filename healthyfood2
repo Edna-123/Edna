@@ -1,0 +1,143 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Deep Dive: Turmeric & Ulam Raja | FreshEats</title>
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+
+    <header>
+        <nav>
+            <div class="logo">Fresh<span>Eats</span></div>
+            <ul>
+                <li><a href="index.html">Home</a></li>
+                <li><a href="nutrition.html">Nutrition Library</a></li>
+            </ul>
+        </nav>
+    </header>
+
+    <main class="detail-container">
+        <div class="food-header">
+            <span class="category-tag">Superfood: Roots</span>
+            <h1>Turmeric (Kunyit)</h1>
+            <p class="summary">More than a spice; it’s a powerful anti-inflammatory agent used in traditional and modern medicine.</p>
+        </div>
+
+        <div class="detail-grid">
+            
+            <div class="science-card">
+                <h3>The Active Compound</h3>
+                <p><strong>Curcumin:</strong> This is the primary bioactive substance in turmeric. It is a polyphenol with potent anti-inflammatory properties.</p>
+                
+                <div class="warning-box">
+                    <strong>Bioavailability Fact:</strong> Curcumin is poorly absorbed by the bloodstream on its own. To increase absorption by 2,000%, you <u>must</u> consume it with <strong>Black Pepper</strong> (which contains piperine).
+                </div>
+            </div>
+
+            <div class="benefits-list">
+                <h3>Health Impact</h3>
+                <ul>
+                    <li><strong>Joint Health:</strong> Reduces oxidative stress in joints, helping with recovery after exercise.</li>
+                    <li><strong>Brain Function:</strong> Linked to increased levels of Brain-Derived Neurotrophic Factor (BDNF).</li>
+                    <li><strong>Heart Health:</strong> Improves the function of the endothelium (the lining of your blood vessels).</li>
+                </ul>
+            </div>
+        </div>
+
+        <section class="usage">
+            <h3>How to Prepare for Maximum Nutrition</h3>
+            <table class="detail-table">
+                <thead>
+                    <tr>
+                        <th>Method</th>
+                        <th>Nutrient Retention</th>
+                        <th>Best For</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr>
+                        <td>Raw / Grated</td>
+                        <td>100% (High enzyme activity)</td>
+                        <td>Ulam, Salads, Juices</td>
+                    </tr>
+                    <tr>
+                        <td>Boiled (Tea)</td>
+                        <td>85% (Water soluble)</td>
+                        <td>Reducing bloating/inflammation</td>
+                    </tr>
+                    <tr>
+                        <td>Sautéed in Oil</td>
+                        <td>95% (Fat soluble)</td>
+                        <td>Curries and stir-frys</td>
+                    </tr>
+                </tbody>
+            </table>
+        </section>
+    </main>
+
+</body>
+</html>
+/* Container for the detail page */
+.detail-container {
+    max-width: 1000px;
+    margin: 40px auto;
+    padding: 0 20px;
+}
+
+.category-tag {
+    background: #e8f5e9;
+    color: #2e7d32;
+    padding: 5px 12px;
+    border-radius: 20px;
+    font-size: 0.8rem;
+    font-weight: bold;
+    text-transform: uppercase;
+}
+
+.food-header h1 {
+    font-size: 2.5rem;
+    margin: 10px 0;
+    color: #1b5e20;
+}
+
+/* Grid for the content */
+.detail-grid {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 30px;
+    margin: 30px 0;
+}
+
+.science-card, .benefits-list {
+    background: #ffffff;
+    padding: 25px;
+    border-radius: 12px;
+    border: 1px solid #e0e0e0;
+}
+
+.warning-box {
+    margin-top: 20px;
+    padding: 15px;
+    background: #fff3e0;
+    border-left: 5px solid #ff9800;
+    font-size: 0.9rem;
+}
+
+/* Table styling for details */
+.detail-table {
+    width: 100%;
+    border-collapse: collapse;
+    margin-top: 20px;
+}
+
+.detail-table th, .detail-table td {
+    padding: 15px;
+    text-align: left;
+    border-bottom: 1px solid #eee;
+}
+
+.detail-table th {
+    background-color: #f5f5f5;
+    color: #333;
+}
