@@ -1,0 +1,156 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>FreshEats | Premium Nutrition & Health</title>
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+
+<header>
+    <nav>
+        <div class="logo">Fresh<span>Eats</span></div>
+        <ul class="nav-links">
+            <li><a href="#calculator">Calorie Calc</a></li>
+            <li><a href="#library">Nutrition Library</a></li>
+            <li><a href="#recipes">Daily Recipes</a></li>
+            <li><a href="#contact">Contact</a></li>
+        </ul>
+    </nav>
+</header>
+
+<section id="calculator" class="tool-section">
+    <div class="container">
+        <h2>Personalized Nutrition Calculator</h2>
+        <p>Enter your details to see your recommended daily intake and clickable meal plans.</p>
+        <div class="calc-box">
+            <input type="number" id="weight" placeholder="Weight (kg)">
+            <input type="number" id="height" placeholder="Height (cm)">
+            <input type="number" id="age" placeholder="Age">
+            <button onclick="calculateCalories()">Get My Plan</button>
+        </div>
+        <div id="result-area" class="hidden">
+            <h3>Your Daily Goal: <span id="calories">0</span> kcal</h3>
+            <p id="advice"></p>
+        </div>
+    </div>
+</section>
+
+<section id="library" class="library-section">
+    <div class="container">
+        <h2>The Nutrition Encyclopedia</h2>
+        <div class="lib-grid">
+            <div class="lib-card" onclick="showDetail('fiber')">
+                <div class="lib-icon">🥬</div>
+                <h3>Dietary Fiber</h3>
+                <p>Click to see why 25g/day is the magic number.</p>
+                <div id="fiber-detail" class="detail-pane hidden">
+                    <hr>
+                    <p><strong>Soluble Fiber:</strong> Dissolves in water to form a gel-like material. It helps lower blood cholesterol and glucose levels. Found in oats, peas, beans, and apples.</p>
+                    <p><strong>Insoluble Fiber:</strong> Promotes the movement of material through your digestive system. Found in whole-wheat flour, wheat bran, nuts, and many vegetables.</p>
+                    <p><strong>Pro-Tip:</strong> In Malaysia, <em>Guava (Jambu Batu)</em> is one of the highest fiber fruits available locally!</p>
+                </div>
+            </div>
+
+            <div class="lib-card" onclick="showDetail('omega')">
+                <div class="lib-icon">🐟</div>
+                <h3>Omega-3 Fatty Acids</h3>
+                <p>Essential for brain health and inflammation.</p>
+                <div id="omega-detail" class="detail-pane hidden">
+                    <hr>
+                    <p><strong>ALA, EPA, & DHA:</strong> These are the three main types. EPA and DHA (found in fish) are more easily used by the body than ALA (found in plants).</p>
+                    <p><strong>Local Source:</strong> <em>Ikan Kembung (Mackerel)</em> is an affordable and incredibly rich source of Omega-3, often beating expensive imported salmon.</p>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+
+<footer id="contact">
+    <div class="container">
+        <div class="contact-grid">
+            <div class="info">
+                <h3>FreshEats HQ</h3>
+                <p>📍 No. 12, Jalan Pinang, Wilayah Persekutuan, 50450 Kuala Lumpur, Malaysia</p>
+                <p>📞 +60 3-2161 8888</p>
+                <p>✉️ consult@fresheats.com.my</p>
+            </div>
+            <div class="hours">
+                <h3>Support Hours</h3>
+                <p>Mon - Fri: 9:00 AM - 6:00 PM</p>
+                <p>Sat: 10:00 AM - 2:00 PM</p>
+            </div>
+        </div>
+    </div>
+</footer>
+
+<script src="script.js"></script>
+</body>
+</html>
+// Function to show/hide detailed information when clicked
+function showDetail(id) {
+    const detail = document.getElementById(id + '-detail');
+    detail.classList.toggle('hidden');
+}
+
+// Function to calculate basic daily calorie needs (Mifflin-St Jeor Equation)
+function calculateCalories() {
+    const w = document.getElementById('weight').value;
+    const h = document.getElementById('height').value;
+    const a = document.getElementById('age').value;
+    
+    if(w && h && a) {
+        // Simple calculation for a moderately active person
+        const bmr = (10 * w) + (6.25 * h) - (5 * a) + 5;
+        const total = Math.round(bmr * 1.375);
+        
+        document.getElementById('calories').innerText = total;
+        document.getElementById('result-area').classList.remove('hidden');
+        
+        if (total < 2000) {
+            document.getElementById('advice').innerText = "We recommend our 'Lean & Green' 1500kcal Meal Plan below.";
+        } else {
+            document.getElementById('advice').innerText = "We recommend our 'High Energy' 2200kcal Meal Plan below.";
+        }
+    } else {
+        alert("Please fill in all fields!");
+    }
+}
+:root {
+    --primary: #2d5a27;
+    --secondary: #8bc34a;
+    --light: #f4f7f6;
+    --dark: #333;
+}
+
+body { font-family: 'Inter', sans-serif; margin: 0; background: var(--light); color: var(--dark); line-height: 1.6; }
+.container { max-width: 1100px; margin: auto; padding: 0 20px; }
+.hidden { display: none; }
+
+/* Navigation */
+nav { display: flex; justify-content: space-between; align-items: center; padding: 20px 5%; background: white; position: sticky; top: 0; box-shadow: 0 2px 10px rgba(0,0,0,0.1); z-index: 100; }
+.logo { font-size: 1.8rem; font-weight: 800; color: var(--primary); }
+.logo span { color: var(--secondary); }
+.nav-links { list-style: none; display: flex; gap: 25px; }
+.nav-links a { text-decoration: none; color: var(--dark); font-weight: 600; transition: 0.3s; }
+.nav-links a:hover { color: var(--secondary); }
+
+/* Calculator */
+.tool-section { padding: 60px 0; text-align: center; background: white; }
+.calc-box { margin: 20px 0; display: flex; justify-content: center; gap: 10px; flex-wrap: wrap; }
+input { padding: 12px; border: 1px solid #ddd; border-radius: 5px; width: 120px; }
+button { padding: 12px 25px; background: var(--primary); color: white; border: none; border-radius: 5px; cursor: pointer; font-weight: bold; }
+button:hover { background: var(--secondary); }
+
+/* Library Cards */
+.lib-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(300px, 1fr)); gap: 20px; padding: 40px 0; }
+.lib-card { background: white; padding: 30px; border-radius: 15px; box-shadow: 0 5px 15px rgba(0,0,0,0.05); cursor: pointer; transition: 0.3s; border-left: 5px solid var(--primary); }
+.lib-card:hover { transform: translateY(-5px); box-shadow: 0 10px 25px rgba(0,0,0,0.1); }
+.lib-icon { font-size: 2.5rem; margin-bottom: 10px; }
+.detail-pane { margin-top: 15px; font-size: 0.95rem; text-align: left; animation: fadeIn 0.5s; }
+
+/* Contact Footer */
+footer { background: #222; color: white; padding: 60px 0; margin-top: 50px; }
+.contact-grid { display: grid; grid-template-columns: 2fr 1fr; gap: 50px; }
+@keyframes fadeIn { from { opacity: 0; } to { opacity: 1; } }
